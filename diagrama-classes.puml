@@ -1,0 +1,32 @@
+@startuml
+title Padrão Visitor - Cálculo de impostos de produtos
+skinparam classAttributeIconSize 0
+interface Produto {
+  +aceitar(visitor: Visitor): float
+}
+interface Visitor {
+  +visitarLivro(livro: Livro): float
+  +visitarEletronico(e: Eletronico): float
+  +visitarAlimento(a: Alimento): float
+}
+class Livro {
+  -titulo: String
+  -preco: float
+}
+class Eletronico {
+  -nome: String
+  -preco: float
+}
+class Alimento {
+  -nome: String
+  -preco: float
+}
+class ImpostoVisitor {
+  +calcular(produto: Produto): float
+}
+Produto <|.. Livro
+Produto <|.. Eletronico
+Produto <|.. Alimento
+Visitor <|.. ImpostoVisitor
+Produto ..> Visitor : aceita
+@enduml
